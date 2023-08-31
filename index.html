@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang=en>
+
+<head>
+    <meta charset=utf-8>
+    <meta content="width=device-width,initial-scale=1" name=viewport>
+    <link
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎉</text></svg>"
+        rel=icon>
+    <title>How to paste text</title>
+    <style>
+        :root {
+            color-scheme: dark light;
+        }
+
+        html {
+            box-sizing: border-box;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+
+        body {
+            margin: 1rem;
+            font-family: system-ui, sans-serif;
+        }
+
+        button {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>How to paste text</h1>
+    <p><button type=button>Paste</button></p><textarea></textarea>
+    <script>
+        const pasteButton = document.querySelector("button");
+        pasteButton.addEventListener("click", (async () => {
+            try {
+                const e = await navigator.clipboard.readText();
+                document.querySelector("textarea").value += e, console.log("Text pasted.")
+            } catch (e) {
+                console.log("Failed to read clipboard. Using execCommand instead."), document
+                    .querySelector("textarea").focus();
+                const t = document.execCommand("paste");
+                console.log("document.execCommand result: ", t)
+            }
+        }));
+    </script>
+</body>
+
+</html>
