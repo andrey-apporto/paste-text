@@ -42,10 +42,12 @@
         pasteButton.addEventListener("click", (async () => {
             try {
                 const e = await navigator.clipboard.readText();
-                document.querySelector("textarea").value += e, console.log("Text pasted.")
-            } catch (e) {
-                console.log("Failed to read clipboard. Using execCommand instead."), document
-                    .querySelector("textarea").focus();
+                document.querySelector("textarea").value += e;
+				console.log("Text pasted.")
+            }
+			catch (e) {
+                console.log("Failed to read clipboard. Using execCommand instead.");
+				document.querySelector("textarea").focus();
                 const t = document.execCommand("paste");
                 console.log("document.execCommand result: ", t)
             }
